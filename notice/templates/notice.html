@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notice</title>
+</head>
+<body>
+<body>
+    {% if error %}
+        <p style="color: red;">Please submit a search term NOT EMPTY or CHECK URL.</p>
+    {% endif %}
+<form action="/search/" method="get">
+    <input type="text" name="q" size="250">
+    <input type="submit" value="SEARCH">
+</form>
+</body>
+</html>

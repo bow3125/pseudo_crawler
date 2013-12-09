@@ -1,0 +1,62 @@
+#!/bin/sh
+
+BaseDir=`pwd`
+databaseDir="$BaseDir/databaseinfo"
+daemonfeederDir="${BaseDir}/daemonFeeder"
+datamanagerDir="$BaseDir/datamanager"
+pythonPath="/usr/bin/python"
+mode=$1
+
+if [ -z "$mode" ] ; then
+		echo "Command Need below Start, Stop, Restart"
+		exit 0
+fi
+		
+case "$mode" in
+	start)
+		echo "START"
+
+		echo "Table Create"
+		echo $databaseDir
+		cd $databaseDir
+		$pythonPath createTable.py
+
+		echo "List Url Extract"
+		cd $datamanagerDir
+		$pythonPath linkExtract.py
+
+		echo "Daemon Start"
+		ps aux | grep 'zeromqReceiver.py' | awk '{print substr($2,index($0,$0))}' | xargs kill -9
+		cd $daemonfeederDir
+		$pythonPath zeromqReceiver.py &
+
+		echo "Thread Worker Start"
+		cd $datamanagerDir
+		$pythonPath crawler.py 
+
+		echo "END"
+		;;
+	stop)
+		ps aux | grep 'zeromqReceiver.py' | awk '{print substr($2,index($0,$0))}' | xargs kill -9
+		echo "STOP"
+		;;
+	restart)
+		cd $daemonfeederDir
+		echo "FeederDaemon RESTART"
+		ps aux | grep 'zeromqReceiver.py' | awk '{print substr($2,index($0,$0))}' | xargs kill -9
+
+        echo "List Url Extract"
+        cd $datamanagerDir
+        $pythonPath linkExtract.py
+
+        echo "Daemon Start"
+        cd $daemonfeederDir
+        $pythonPath zeromqReceiver.py &
+
+        echo "Thread Worker Start"
+        cd $datamanagerDir
+        $pythonPath crawler.py
+
+        echo "END"
+		;;
+esac
