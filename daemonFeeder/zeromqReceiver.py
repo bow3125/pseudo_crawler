@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+# control url feeder whit protocol http 
 import zmq
 import Queue
 import signal
