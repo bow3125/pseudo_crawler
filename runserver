@@ -26,6 +26,7 @@ case "$mode" in
 		$pythonPath linkExtract.py
 
 		echo "Daemon Start"
+		# This Kill is not good 
 		ps aux | grep 'zeromqReceiver.py' | awk '{print substr($2,index($0,$0))}' | xargs kill -9
 		cd $daemonfeederDir
 		$pythonPath zeromqReceiver.py &
