@@ -9,6 +9,7 @@ from pseudo_crawler import settings
 def dictValuePad(key):
     return '%(' + str(key) + ')s'
 
+# use this control command
 class DBQuery(object) :
     def __init__(self):
         self.db = MySQLdb.connect(host=settings.DATABASES['default']['HOST'], user=settings.DATABASES['default']['USER'], passwd=settings.DATABASES['default']['PASSWORD'], db=settings.DATABASES['default']['NAME'],cursorclass=MySQLdb.cursors.DictCursor)
