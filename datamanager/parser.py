@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from bs4 import Comment
 from bs4 import Tag
 
+# parsing algorism append take the text
 NEGATIVE = re.compile(".*comment.*|.*meta.*|.*footer.*|.*foot.*|.*cloud.*|.*head.*")
 POSITIVE = re.compile(".*post.*|.*hentry.*|.*entry.*|.*content.*|.*text.*|.*body.*")
 BR = re.compile("<br */? *>[ \r\n]*<br */? *>")
