@@ -1,5 +1,5 @@
 # Django settings for pseudo_crawler project.
-
+# this is main for using control pannel
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
