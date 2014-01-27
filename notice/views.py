@@ -1,5 +1,6 @@
 # _*_ coding: utf-8 _*_
 # Create your views here.
+# monitor control
 
 from django.http import HttpResponse
 from django.template import Context
