@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 
+# This is for taget with DB control
 import time
 import md5
 
